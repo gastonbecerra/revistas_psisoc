@@ -1,11 +1,12 @@
-setwd("C:/Users/GASTON/Desktop/r/revistas_psicosocial")
+setwd("C:/Users/GASTON/Desktop/r/revistas_psicosoc")
 library(tidyverse) # we'll use dplyr and ggplot
 library(lubridate) # we'll parse some years
 library(gsheet)
 library(ojsr)
 
 
-ps <- readRDS(file="data/ps_r19_200326_1938.rds")
+ps <- read_rds("data/ps_r19_200326_1938.rds")
+
 
 # funciones para esta seccion ---------------------------- 
 
@@ -135,15 +136,21 @@ glimpse(keywords)
 correlaciones <- keywords %>% group_by(keywords) %>% filter(n() > 5) %>% ungroup() %>%  # keywords que aparezcan por lo menos 5 veces en toda la muestra
   widyr::pairwise_cor(item = keywords, feature = input_url, sort = TRUE, method = "pearson") %>%
   filter(correlation>0.15) # correlacion minima
+corr_graph <- correlaciones %>% igraph::graph_from_data_frame() # armo las correlaciones
+corr_graph <- set_edge_attr(corr_graph, "weight", value=correlaciones$correlation) # sumo la correlacion al grafico (edges)
+V(corr_graph)$degree <- igraph::degree(correlaciones %>% igraph::graph_from_data_frame()) # sumo el degree de los nodos
+nodos <- as.data.frame(V(corr_graph)$name) %>% select(nodos=1)
+nodos <- nodos %>% left_join ( keywords %>% group_by(keywords) %>% tally() , by=c("nodos"="keywords")) # sumo la cantidad de veces que aparece un nodo
+nodos <- nodos %>% left_join ( keywords %>% group_by(base_url, keyword = keywords) %>% tally(sort=TRUE) %>% group_by(keyword) %>% summarise(cant_revistas=n()) , by=c("nodos"="keyword")) # sumo la cantidad de revistas en las que aparece
+V(corr_graph)$n <- nodos$n
+V(corr_graph)$revistas <- nodos$cant_revistas
+rm(nodos)
 
-corr_graph <- correlaciones %>% igraph::graph_from_data_frame()
-corr_graph <- set_edge_attr(corr_graph, "weight", value=correlaciones$correlation)
-V(corr_graph)$degree <- igraph::degree(correlaciones %>% igraph::graph_from_data_frame())
-
-ggraph::ggraph(corr_graph, layout = "kk") +
-  geom_edge_link(aes(alpha=weight, width=weight, color=weight)) +
-  geom_node_point(aes(size=degree)) +
-  geom_node_text(aes(label = name), vjust = 1, hjust = 1)
+ggraph::ggraph(corr_graph, layout = "fr") +
+  geom_edge_link(aes(alpha=weight, width=weight)) + # color de lineas es la correlacion
+  geom_node_point(aes(size=n, color=revistas)) + # tamaño de punto es la frecuencia del keyword, el color la cant de revistas
+  # geom_node_text(aes(label = name, size=degree), vjust = 1, hjust = 1) # el tamaño del texto la centralidad
+  geom_node_text(aes(label = name, size=degree), vjust = 1, hjust = 1) # tamaño de palabra es la frecuencia del keyword 
 
 # algunas correlaciones particulares
 correlaciones %>% filter(item1=="personalidad")
@@ -152,3 +159,5 @@ correlaciones %>% filter(item1=="representaciones sociales")
 correlaciones %>% filter(item1=="psicologia")
 correlaciones %>% filter(item1=="psicologia social")
 
+rm(correlaciones, corr_graph, keywords)
+rm(limpiar,separadores)

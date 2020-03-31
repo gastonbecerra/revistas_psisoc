@@ -1,4 +1,4 @@
-setwd("C:/Users/GASTON/Desktop/r/revistas_psicosocial")
+setwd("C:/Users/GASTON/Desktop/r/revistas_psicosoc")
 library(tidyverse) # we'll use dplyr and ggplot
 library(lubridate) # we'll parse some years
 library(gsheet)

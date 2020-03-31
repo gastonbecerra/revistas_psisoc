@@ -1,8 +1,11 @@
-setwd("C:/Users/GASTON/Desktop/r/revistas_psicosocial")
+setwd("C:/Users/GASTON/Desktop/r/revistas_psicosoc")
 library(tidyverse) # we'll use dplyr and ggplot
 library(lubridate) # we'll parse some years
 library(gsheet)
 library(ojsr)
+
+
+ps <- read_rds("data/ps_r19_200326_1938.rds")
 
 
 # arreglos ad-hoc ---------------------------- 
