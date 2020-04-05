@@ -16,14 +16,15 @@ revistas <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1QfVYYIVi
 
 
 ps_revistas <- revistas %>% left_join( ojsr::process_urls(revistas$url)  , by=c("url"="input_url") ) # procesamos las revistas para ver cuales son OJS
-ps_numeros <- ojsr::get_issue_url(input_url = ps_revistas$url, verbose = TRUE) # a partir de sus urls, recuperamos los links a los issues
-ps_articulos <- ojsr::get_article_url(ps_numeros$output_url, verbose = TRUE) # a partir las urls de los issues, recuperamos los links a los articulos
-ps_metadata <- ojsr::get_meta_from_html(ps_articulos$output_url, verbose = TRUE) # a partir las urls de los articulos, recuperamos los metadata
+ps_numeros <- ojsr::get_issues_from_archive(ps_revistas$url, verbose = TRUE) # a partir de sus urls, recuperamos los links a los issues
+ps_articulos <- ojsr::get_articles_from_issue(ps_numeros$output_url, verbose = TRUE) # a partir las urls de los issues, recuperamos los links a los articulos
+ps_metadata <- ojsr::get_html_meta_from_article(ps_articulos$output_url, verbose = TRUE) # a partir las urls de los articulos, recuperamos los metadata
+ps_galeradas <- ojsr::get_galley_from_article(ps_articulos$output_url, verbose = TRUE) # a partir las urls de los articulos, recuperamos las galeradas
 
-ps <- list(revistas=ps_revistas, numeros=ps_numeros, articulos=ps_articulos, metadata=ps_metadata) # por comodidad, guardamos todo en un objeto
+ps <- list(revistas=ps_revistas, numeros=ps_numeros, articulos=ps_articulos, metadata=ps_metadata, galeradas=ps_galeradas) # por comodidad, guardamos todo en un objeto
 saveRDS(ps,file=paste0("data/ps_","r",nrow(ps$revistas),"_",format(Sys.time(), "%y%m%d_%H%M"),".rds")) # guardamos en disco, para evitar este paso de ahora en mas
 
-rm(ps_articulos,ps_metadata,ps_numeros,ps_revistas,revistas)
+rm(ps_articulos,ps_metadata,ps_numeros,ps_revistas,ps_galeradas,revistas)
 
 
 # exploramos los datos ---------------------------- 
@@ -66,6 +67,7 @@ muestra()
 
 # sumamos otras fuentes ---------------------------- 
 
+
 ps$revistas %>% filter(is.na(base_url)) # las que no fueron tomadas con ojsr
 
 ### se pueden scrapear otras fuentes, tipo JSTOR?
@@ -76,3 +78,11 @@ ps$revistas %>% filter(is.na(base_url)) # las que no fueron tomadas con ojsr
 # https://www.tandfonline.com/action/journalInformation?show=aimsScope&journalCode=rrps20
 # ojs search:
 # https://atheneadigital.net/search?subject=Psicolog%C3%ADa%20Social
+
+
+
+
+# sumamos otras fuentes ---------------------------- 
+
+
+# Cuadernos Hispanoamericanos de Psicología (UnBosque, Col.)
