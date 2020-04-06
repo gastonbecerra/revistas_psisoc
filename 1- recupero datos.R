@@ -43,6 +43,8 @@ ps <- readRDS("data/ps_r19_200325_1831.rds")
 ps$numeros$base_url <- ojsr::process_urls(url = ps$numeros$input_url) %>% select(base_url) %>% unlist()
 ps$articulos$base_url <- ojsr::process_urls(url = ps$articulos$input_url) %>% select(base_url) %>% unlist()
 ps$metadata$base_url <- ojsr::process_urls(url= ps$metadata$input_url) %>% select(base_url) %>% unlist()
+ps$galeradas$base_url <- ojsr::process_urls(url= ps$galeradas$input_url) %>% select(base_url) %>% unlist()
+
 
 # muestra por revista
 muestra <- function(t=TRUE, b=FALSE) {
@@ -50,9 +52,11 @@ muestra <- function(t=TRUE, b=FALSE) {
     left_join( ps$numeros %>% group_by( base_url ) %>% summarise(numeros=n()) ) %>%
     left_join( ps$articulos %>% group_by( base_url ) %>% summarise(articulos=n()) ) %>%
     left_join( ps$metadata %>% group_by( base_url ) %>% summarise(metadata=n()) ) %>%
+    left_join( ps$galeradas %>% group_by( base_url ) %>% summarise(galeradas=n()) ) %>%
     left_join( ps$metadata %>% filter(meta_data_name=="citation_keywords") %>% group_by( base_url ) %>% summarise(keywords=n()) ) %>%
     mutate( met_art = metadata/articulos ) %>%
-    select (nombre, numeros, articulos, metadata, met_art, keywords) 
+    mutate( key_art = keywords/articulos ) %>%
+    select (nombre, numeros, articulos, metadata, galeradas, keywords, met_art, key_art) 
   if (b==TRUE) {
     muestra <- muestra %>%
       left_join( ps$revistas %>% select( nombre, base_url ) )
