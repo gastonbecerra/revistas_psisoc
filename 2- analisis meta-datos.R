@@ -8,23 +8,6 @@ library(ojsr)
 ps <- read_rds("data/ps_r19_200326_1938.rds")
 
 
-# arreglos ad-hoc ---------------------------- 
-
-muestra()
-
-# tomamos los meta datos de los que tienen pocos meta-data y los recuperamos con oai
-oai_url <- muestra(t=FALSE) %>% filter(met_art < 10) %>% select(nombre) %>% left_join( ps$revistas ) %>% select(base_url) %>% unlist() # busco la base_url de revistas con poco metadatos ...
-oai_data <- ojsr::get_oai_meta_from_article(input_url = ps$articulos %>% filter(base_url==oai_url) %>% select(output_url) %>% unlist(), verbose = TRUE) # ... y lo uso de criterio para listar sus articulos, y recuperar metadatos con oai
-oai_data$base_url <- ojsr::process_urls(url= oai_data$input_url ) %>% select(base_url) %>% unlist() # le agregamos la referencia a la revista
-ps$metadata <- ps$metadata %>% anti_join( ps$metadata %>% filter(base_url == oai_url) ) # sacamos los registros viejos
-ps$metadata <- rbind(ps$metadata, oai_data) # y ponemos los nuevos
-nrow(ps$metadata)
-rm(oai_data, oai_url)
-
-# cerramos arreglos, grabando
-saveRDS(ps,file=paste0("data/ps_","r",nrow(ps$revistas),"_",format(Sys.time(), "%y%m%d_%H%M"),".rds")) # guardamos en disco, para evitar este paso de ahora en mas
-
-
 # subtotales meta-datos ------------------
 
 
