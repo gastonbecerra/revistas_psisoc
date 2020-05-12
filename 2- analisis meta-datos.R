@@ -5,11 +5,13 @@ library(gsheet)
 library(ojsr)
 
 
-ps <- read_rds("data/ps_r19_200326_1938.rds")
+ps <- read_rds("data/ps_r26_200511_1214.rds")
 
 
 # subtotales meta-datos ------------------
 
+metadata <- ps$metadata %>% group_by(meta_data_name) %>% tally()
+metadata
 
 # cantidad de articulos x año
 ps$metadata %>% filter(meta_data_name=="citation_date") %>% select(fecha = meta_data_content) %>%
@@ -39,5 +41,4 @@ ps$galeradas %>% group_by(format) %>% tally(sort = TRUE)
 # version OJS
 ps$metadata %>% filter(meta_data_name=="generator") %>% select(x = meta_data_content) %>% group_by(x) %>% tally(sort=TRUE)
 
-# sexo autores? 
-# 2do: hay libreria para parsear nombres?
+# 2do: sexo autores? / hay libreria para parsear nombres?

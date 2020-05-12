@@ -5,7 +5,7 @@ library(gsheet)
 library(ojsr)
 
 
-ps <- read_rds("data/ps_r19_200326_1938.rds")
+ps <- read_rds("data/ps_r26_200511_1214.rds")
 
 
 # funciones para esta seccion ---------------------------- 
@@ -27,6 +27,7 @@ separadores <- function(x) {
   y <- gsub("." , "$", y, fixed = TRUE)
   y <- gsub("," , "$", y, fixed = TRUE)
   y <- gsub(";" , "$", y, fixed = TRUE)
+  y <- gsub(":" , "$", y, fixed = TRUE)
   y <- gsub("– " , "$", y, fixed = TRUE)
   y <- gsub("  " , "$", y, fixed = TRUE)
   y <- gsub("$" , " $ ", y, fixed = TRUE)
@@ -45,8 +46,11 @@ ps$metadata %>% filter(meta_data_name=="DC.Subject") %>% select(x = meta_data_co
 # 2do: hay que normalizar
 
 # armo una tabla de keywords
-keywords <- ps$metadata %>% filter(meta_data_name=="citation_keywords", meta_data_xmllang=="es", trimws(meta_data_content)!="") %>% 
-  select(keywords = meta_data_content, base_url, input_url) %>% mutate(keywords=limpiar(keywords))
+keywords <- ps$metadata %>% filter(meta_data_name=="citation_keywords",  trimws(meta_data_content)!="") %>% 
+  # filter(meta_data_xmllang=="es") %>%
+  select(keywords = meta_data_content, base_url, input_url) %>% mutate(keywords=limpiar(keywords)) %>%
+  transform(nchar=nchar(keywords)) %>% filter(nchar < 40)
+
 # 2do: como filtrar por idioma? solo "es" es muy restrictivo... hay varios NA o "" con keywords?
 
 
@@ -109,9 +113,9 @@ rm(nodos)
 ggraph::ggraph(corr_graph, layout = "fr") +
   geom_edge_link(aes(alpha=weight, width=weight)) + # color de lineas es la correlacion
   geom_node_point(aes(size=n, color=revistas)) + # tamaño de punto es la frecuencia del keyword, el color la cant de revistas
-  # geom_node_text(aes(label = name, size=degree), vjust = 1, hjust = 1) # el tamaño del texto la centralidad
+  geom_node_text(aes(label = name, size=degree), vjust = 1, hjust = 1)  # el tamaño del texto la centralidad
   # geom_node_text(aes(label = name, size=degree), vjust = 1, hjust = 1) # tamaño de palabra es la frecuencia del keyword
-  geom_node_text(aes(label = name), vjust = 1, hjust = 1) # tamaño de palabra es la frecuencia del keyword 
+  # geom_node_text(aes(label = name), vjust = 1, hjust = 1) # tamaño de palabra es la frecuencia del keyword 
 
 # algunas correlaciones particulares
 correlaciones %>% filter(item1=="personalidad")
