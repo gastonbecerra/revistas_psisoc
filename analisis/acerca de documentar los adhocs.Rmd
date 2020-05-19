@@ -1,0 +1,50 @@
+---
+title: "adhoc"
+author: "gaston becerra"
+date: "13/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## acerca de documentar los adhocs
+
+### cuantos NA habia en cada tabla, antes de las adhoc?
+
+
+                                                     nombre numeros articulos metadata galeradas keywords   met_art    key_art abstracts
+                     Desvalimiento psicosocial (UCES, Arg.)       8        84     1039        86       NA  12.36905         NA        NA
+                      Revista de Psicología (UChile, Chile)      48       520    17975       682     1321  34.56731  2.5403846        NA
+                              Salud y Sociedad (UCN, Chile)      25       162    10152       168      950  62.66667  5.8641975       274
+                                        PSocial (UBA, Arg.)      11        69     3150        72      253  45.65217  3.6666667        77
+                            Pensando Psicología (UCC, Col.)      16       178     9529       196      798  53.53371  4.4831461       354
+                       Universitas Psychologica (PUJ, Col.)      10       169    10224       536      757  60.49704  4.4792899       341
+          Revista de Psicología Social Aplicada (UMH, Esp.)      NA        NA       NA        NA       NA        NA         NA        NA
+ Revista de Investigación en Psicología Social (UNLZ, Arg.)       7        33     1402        38       95  42.48485  2.8787879        33
+                   Revista de Psicología Social (FIA, Esp.)      NA        NA       NA        NA       NA        NA         NA        NA
+    Intervención Psicosocial (Colegio Of. Psi. Madrid, Esp)      NA        NA       NA        NA       NA        NA         NA        NA
+                                        Psykhe (PUC, Chile)      56       670    32280       670     2742  48.17910  4.0925373      1233
+                                Revista Evaluar (UNC, Arg.)      23       139     6484       141      357  46.64748  2.5683453       180
+            Subjetividad y procesos cognitivos (UCES, Arg.)      NA        NA       NA        NA       NA        NA         NA        NA
+            Psicología, Conocimiento y Sociedad (UR, Urug.)      21       219    10002       224      584  45.67123  2.6666667       220
+                                     Psicodebate (UP, Arg.)      25       186     9822       354      746  52.80645  4.0107527       365
+                            Acción Psicológica (UNED, Esp.)      36       347    24273       351     3791  69.95101 10.9250720       683
+              Revista costarricense de Psicología (CPP, CR)      19       115     6247       114      564  54.32174  4.9043478       112
+  Cuadernos Hispanoamericanos de Psicología (UBosque, Col.)      11        65     3535        70      248  54.38462  3.8153846       187
+                                Athenea Digital (UAB, Esp.)      NA        NA       NA        NA       NA        NA         NA        NA
+        Revista de Psicología y Ciencias del Comportamiento      15       103     6099       121      589  59.21359  5.7184466       193
+                                         Academo (UA, Par.)      12       128     7400       131      430  57.81250  3.3593750       128
+                                     Castalia (UAHC, Chile)       9        65      874        65      144  13.44615  2.2153846        NA
+                      Investigación & Desarrollo (UN, Col.)      NA        NA       NA        NA       NA        NA         NA        NA
+                                     Busqueda (CECAR, Col.)      NA        96     4995       138      265  52.03125  2.7604167       210
+                                   Psicología (Unemi, Ecu.)       6        52     2309        88       24  44.40385  0.4615385        86
+                Rev. Caribeña de Psicología (FUNDEPSIC, PR)       4        23     1432        33       63  62.26087  2.7391304        41
+                                                      Total     362      3423   169223      4278    14721 972.90064 74.1498710      4717
+
+
+> sum(is.na(m$abstracts)) / (nrow(m)-1)
+[1] 0.3461538
+
+el relaburo que se hace con funciones adhoc para completar NAs juntando datos, se acerca mas a una imputacion de casos faltantes en cuanti que a una (re)codificacion? 

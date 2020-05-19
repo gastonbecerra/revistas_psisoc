@@ -1,0 +1,21 @@
+topic|t|rank1|>0.25|>0.5|>0.75|m200
+topic_001|comportamiento mismo relación tipo manera primero considerar uso respecto problema largo creencia lugar importante cambio forma internet relacionado comunicación embargo|118|5|1|NA|0.129236774749831
+topic_002|sujeto permitir concepto sistema autor desarrollar proceso cuenta momento teórico través posible trabajo indicador técnica tomar incluir capacidad estado tendencia|136|18|10|NA|0.149258056102619
+topic_003|mujer nivel edad año diferencia hombre sexo alto encontrar género significativo sexual resultado mayor medio actitud ciudad existir muestra bajo|158|11|NA|NA|0.165047126615141
+topic_004|estudiante investigación resultado universidad académico universitario nacional psicología objetivo llevar orientación presentar año institución cabo internacional área carrera contexto obtenido|145|7|NA|NA|0.147457796537515
+topic_005|psicología artículo conocimiento desarrollo campo humano práctica ciencia nuevo teórico actual fenómeno historia abordar reflexión plantear producción metodológico mundo teoría|317|20|NA|NA|0.188241081076356
+topic_006|salud persona vida personal bienestar mental positivo calidad recurso mayor aspecto subjetivo situación objetivo emoción vivir ma´ negativo vital analizar|152|15|NA|NA|0.162967218865793
+topic_007|the resumir with this were Abstract betweer was for result childrar werar psychological analysis not usar two life bear between|434|94|4|NA|0.276346844762525
+topic_008|artículo profesional atención necesidad información revisión base servicio dato científico realizar revista inclusión investigador situación número psicólogo investigación constituir conocer|171|17|NA|NA|0.156343711301164
+topic_009|niño desarrollo año cognitivo habilidad prueba test nivel comprensión infantil función proceso evaluación actividad dificultad resultado edad inteligencia lectura capacidad|146|27|NA|NA|0.175360993519635
+topic_010|investigación análisis experiencia trabajo realizar entrevista metodología principal partir cualitativo analizar contenido resultado estudio categoría describir método realizado aspecto utilizar|135|5|NA|NA|0.139069281113218
+topic_011|grupo participante respuesta efecto resultado mostrar utilizar memoria medida condición evaluar clave considerar indicar elemento mismo experimental realizar diferencia característica|86|13|3|1|0.146894273788024
+topic_012|adolescente violencia familiar conducta relación familia emocional padre estilo estudio pareja apego hijo madre parental víctima moral conflicto mostrar vínculo|111|10|2|NA|0.160412422132762
+topic_013|modelo trabajo presente diferente personalidad analizar valor principal distinto cultura organización relación presentar futuro perspectiva empírico teoría base diverso autoestima|100|8|NA|NA|0.136847995777687
+topic_014|social política cultural proceso comunidad identidad acción contexto público participación derecho económico representación espacio sociedad red generar comunitario político individual|150|8|NA|NA|0.162106792197979
+topic_015|dar parte objetivo forma partir falr corporal cuidado imagen público impacto uma considerar cuerpo estado presente dado normal tratar X-none|133|49|2|NA|0.181560483714344
+topic_016|estudio riesgo factor joven tipo objetivo población resultado realizar consumo determinar grado establecer presente encontrar embargo uso alcohol vez asociado|87|7|1|NA|0.134622330613615
+topic_017|programa escolar educación educativo aprendizaje docente escuela estrategia práctica profesor chile estudiante alumno formación través evaluación básico enseñanza contexto competencia|134|9|1|NA|0.160480581589354
+topic_018|intervención paciente clínico tratamiento trastorno presentar problema ansiedad caso depresión psicológico enfermedad diagnóstico afrontamiento estrés síntoma estrategia control terapéutico cambio|149|21|NA|NA|0.18072915985248
+topic_019|escala instrumento análisis factor muestra validez factorial estructura evaluar interno ítem psicométrico propiedad dimensión versión estudio consistencia adecuado confiabilidad objetivo|231|94|NA|NA|0.258685983956804
+topic_020|variable relación estudio psicológico resultado mayor satisfacción percepción mostrar analizar objetivo apoyo físico laboral significativo general efecto muestra dimensión actividad|98|18|NA|NA|0.160617041898528

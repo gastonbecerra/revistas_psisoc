@@ -8,7 +8,7 @@ library(doParallel)
 library(profvis)
 
 
-ps <- read_rds("data/ps_r26_200511_1214.rds")
+ps <- read_rds("data/ps_r26_200511_2105.rds")
 
 
 # funciones para esta seccion ---------------------------- 
